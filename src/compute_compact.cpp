@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 
 		// read projectors
 		cout << "loading proj ... ";
-		Matrix proj(rcf.proj_dir + "/" + rcf.proj_file);
+		Matrix proj(rcf.proj_dir + "/" + rcf.proj_file, MATRIX_LOCAL);
 		if (!proj) {cout << "Error " << rcf.proj_file << endl;	exit(-1);}
 		cout << proj.height << " features of size "<< proj.width << endl;
 
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 
 		if(rcf.proj_white) {
 			cout << "whitening projectors ... ";
-			Matrix weights(rcf.proj_dir+"/"+rcf.weight_file);
+			Matrix weights(rcf.proj_dir+"/"+rcf.weight_file, MATRIX_LOCAL);
 			if(!weights) {cout << "Error " << rcf.weight_file << endl;	exit(-1); }
 
 			for(size_t j = 0 ; j < proj.height ; j++) {
