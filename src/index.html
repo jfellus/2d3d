@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>Similarity Search</title>
+
+<style>
+
+html {
+	text-align:center;
+	font-size:10px;
+	font-family:sans-serif;
+}
+
+.img {
+	border:1px solid #AAAAAA;
+	box-shadow:2px 2px 10px #888888;
+	margin:5px;
+	display:inline-block;
+}
+
+td {
+	font-size:8px; background-color:none;
+}
+
+img {
+	display:block;
+}
+
+.positive  {
+	background-color:#55FF55;
+	color:#001100;
+}
+
+.negative {
+	background-color:#880000;
+	color:white;
+}
+
+.sim {
+	color:white;
+	background-color:blue;
+	margin:0;
+	height:8px;
+	left:0;
+	display:block;
+}
+
+p {margin:0; padding:0;}
+
+div { position:relative; }
+
+#main img:first-child {
+	width:300px;
+}
+
+</style>
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+var DIR = null;
+
+function clear_results() {
+	$("#main").empty();
+}
+
+function add_result(file, sim) {
+	var t = $('<div class="img"><img src="file://'+DIR + "/"+ file+'" onclick="similarity_search(\''+file+'\')"><p>'+file+'</p>'+
+			'<div class="sim" style="width:'+sim+'%;">'+sim+'%</div>'+
+		  '</div>');
+	$("#main").append(t);
+	return t;
+}
+
+function set_dir(dir) {
+	DIR = dir;
+	q("setdir", dir);
+}
+
+function similarity_search(query) {
+	stop_cam();
+	q("similarity", query, function(r) {
+		clear_results();
+		var a = r.split("\n");
+		for(i = 0; i < a.length; i++) {
+			var az = a[i].split("|");
+			var file = az[0];
+			var sim = az[1];
+			var div = add_result(file, sim);
+			div.addClass(is_positive(query, file) ? "positive" : "negative");
+			if(i > 100) break;
+		}
+		$("html, body").animate({ scrollTop: 0 }, "slow");	
+	});
+}
+
+function q(query, v, f) {
+	$.ajax( "http://localhost:10013/?q="+query+"&v="+v ).done(function(r) {if(f) f(r);}).fail(function() {alert( "error" );});
+}
+
+function stop() {
+	q("stop");
+}
+
+function init() {
+	q("getdir", null, function(r) {
+	DIR = r;
+	q("list", null, function(r) {
+		clear_results();
+		var a = r.split("\n");
+		for(i = 0; i < a.length; i++) {
+			var file = a[i];
+			add_result(file, "?");
+		}
+	});
+	});
+}
+
+var cam_started = false;
+function query_cam() {
+	$("#cam").show();
+	q("simcam", "", function(r) {
+		$("#cam").attr("src", "file:///dev/shm/cam.png?timestamp=" + new Date().getTime());
+		clear_results();
+		var a = r.split("\n");
+		for(i = 0; i < a.length; i++) {
+			var az = a[i].split("|");
+			var file = az[0];
+			var sim = az[1];
+			var div = add_result(file, sim);
+			if(i >= 0) break;
+		}
+		if(cam_started) window.setTimeout(query_cam, 200);
+	});
+}
+
+function start_cam() {
+	if(!cam_started) {
+		cam_started = true;
+		window.setTimeout(query_cam, 1);
+	} else {
+		stop_cam();
+	}
+}
+
+function stop_cam() {
+	cam_started = false;
+	$("#cam").hide();
+}
+
+function is_positive(q, f) {
+	return Math.floor(parseInt(q)/100) == Math.floor(parseInt(f)/100);
+}
+
+$(function() {
+     window.moveTo(screen.availWidth,screen.availHeight);
+     window.resizeTo(screen.availWidth,screen.availHeight);
+});
+$(window).bind("beforeunload", function() { 
+    stop();
+});
+</script>
+</head>
+<body onload="init()">
+<div id="menu"><button onclick="start_cam()">START CAMERA</button></div>
+<img id="cam" src="" style="display:none"  height=50% />
+<div id="main"></div>
+</body>
+</html>

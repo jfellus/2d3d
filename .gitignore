@@ -1,0 +1,15 @@
+CMakeCache.txt
+Makefile
+images
+proj
+dict32
+CMakeFiles
+compute_*
+create_thumbnails
+similarity_search
+lib/*
+free_memory
+docid_to_path
+*.fvec
+*similarity*.txt
+.*
