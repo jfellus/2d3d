@@ -1,6 +1,7 @@
 /*
-Copyright © CNRS 2013. 
-Authors: David Picard, Son Vu
+Copyright © CNRS 2012. 
+Authors: David Picard, Philippe-Henri Gosselin, Romain Negrel, Hedi 
+Tabia
 Contact: picard@ensea.fr
 
 This software is governed by the CeCILL license under French law and
