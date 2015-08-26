@@ -32,8 +32,8 @@ knowledge of the CeCILL license and that you accept its terms.
 
 */
 
-#ifndef SHAREDMATRIX_H_
-#define SHAREDMATRIX_H_
+#ifndef SHAREDMATRIeeX_H_
+#define SHAREDMATRIeeX_H_
 
 #include <stdlib.h>
 #include <string>
@@ -103,7 +103,7 @@ public:
 	inline bool save(const char* file) const {return this->write(file);}
 	inline bool save(const string& file) const {return this->write(file.c_str());}
 
-	void dump(size_t nbrows=0, size_t nbcols=0);
+	void dump (size_t nbrows=0, size_t nbcols=0);
 
 	void clear();
 
