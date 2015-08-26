@@ -96,16 +96,16 @@ int main(int argc, char **argv) {
 
 			cout << "Save descriptors ... ";
 			Matrix out(&descriptors[0], descriptorDim, descriptorCount);
-			out.write(rcf.desc_output);
+			out.write(rcf.desc_output.c_str());
 		}
 		else {
 			cout << "Save descriptors ... ";
-			Matrix out(descriptorDim, ndesc, MATRIX_LOCAL);
+			Matrix out(descriptorDim, ndesc);
 			int b = descriptorCount/ndesc;
 			for(int i=0; i<ndesc; i++) {
 				memcpy(&out[i*descriptorDim], &descriptors[i*b*descriptorDim], descriptorDim*sizeof(float));
 			}
-			out.write(rcf.desc_output);
+			out.write(rcf.desc_output.c_str());
 		}
 
 		return 0;
