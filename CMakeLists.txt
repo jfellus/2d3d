@@ -87,7 +87,7 @@ add_executable(similarity_search src/similarity_search.cpp)
 add_executable(similarity_server src/similarity_server.cpp)
 add_executable(free_memory src/free_memory.cpp)
 add_executable(docid_to_path src/docid_to_path.cpp)
-
+add_executable(extract_descriptors src/extract_descriptors.cpp)
 
 
 
@@ -159,6 +159,7 @@ target_link_libraries(retin_dfeat retin_codecs)
 
 target_link_libraries(compute_dictionary ${retin_libs})
 target_link_libraries(compute_vlat ${retin_libs})
+target_link_libraries(extract_descriptors ${retin_libs})
 target_link_libraries(compute_projectors ${retin_libs})
 target_link_libraries(compute_compact ${retin_libs} retin_core)
 target_link_libraries(compute_matrix ${retin_libs})
