@@ -94,12 +94,12 @@ int main(int argc, char **argv) {
 			cout << "Only " << descriptorCount << "/" << ndesc << " descriptors extracted\n";
 			ndesc = descriptorCount;
 
-			cout << "Save mean descriptors ... ";
+			cout << "Save descriptors ... ";
 			Matrix out(&descriptors[0], descriptorDim, descriptorCount);
 			out.write(rcf.desc_output);
 		}
 		else {
-			cout << "Save mean descriptors ... ";
+			cout << "Save descriptors ... ";
 			Matrix out(descriptorDim, ndesc, MATRIX_LOCAL);
 			int b = descriptorCount/ndesc;
 			for(int i=0; i<ndesc; i++) {

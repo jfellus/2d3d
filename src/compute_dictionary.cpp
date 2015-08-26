@@ -104,21 +104,21 @@ int main(int argc, char **argv) {
 
 		// Cluster centers
 		cout << "Save cluster centers ... ";
-		Matrix centers(descriptorDim,clusterCount, rcf.dict_dir+"/"+rcf.dict_file);
+		Matrix centers(descriptorDim,clusterCount);
 		qt.getCenters( centers, descriptorDim );
 		centers.save(rcf.dict_dir+"/"+rcf.dict_file);
 		cout << "ok\n";
 
 		// Mean descriptors
 		cout << "Save mean descriptors ... ";
-		Matrix mean1(descriptorDim,clusterCount, rcf.dict_dir+"/"+rcf.mean1_file);
+		Matrix mean1(descriptorDim,clusterCount);
 		qt.computeMeanTensors( mean1, descriptorDim, 1);
 		mean1.save(rcf.dict_dir+"/"+rcf.mean1_file);
 		cout << "ok\n";
 
 		// Mean Tensors
 		cout << "Save mean tensors ... ";
-		Matrix mean2( descriptorDim*descriptorDim,clusterCount, rcf.dict_dir+"/"+rcf.mean2_file );
+		Matrix mean2( descriptorDim*descriptorDim,clusterCount);
 		qt.computeMeanTensors( mean2, descriptorDim*descriptorDim, 2);
 		mean2.save(rcf.dict_dir+"/"+rcf.mean2_file);
 		cout << "ok\n";

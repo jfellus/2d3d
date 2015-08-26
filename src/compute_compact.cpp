@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 
 		// load vlat
 		cout << "loading vlat ... " ;
-		Matrix vlat(rcf.vlat_file);
+		Matrix vlat(rcf.vlat_file, MATRIX_LOCAL);
 		if (!vlat) {cout << "no file or shared matrix " << rcf.vlat_file << endl;	exit(-1);}
 		cout << vlat.height << " features of size "<< vlat.width << endl;
 
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 
 		// project
 		cout << "projecting on " << proj.height << " projectors ... ";
-		Matrix compact(proj.height, vlat.height, rcf.compact_file);
+		Matrix compact(proj.height, vlat.height, MATRIX_LOCAL);
 		compact.clear();
 		matrix_CpAtB_float(compact, proj, vlat, proj.height, proj.width, vlat.height);
 		cout << "ok\n";

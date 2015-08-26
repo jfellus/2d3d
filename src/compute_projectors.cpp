@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
 		// load vlat
 		cout << "loading vlat ... ";
-		Matrix vlat_full(rcf.vlat_file, MATRIX_LOCAL, 2000);
+		Matrix vlat_full(rcf.vlat_file, MATRIX_LOCAL);
 		if (!vlat_full) {cout << "Error : no index in " << rcf.vlat_file << endl; exit(-1);	}
 		cout << vlat_full.height << " features of size "<< vlat_full.width << endl;
 
@@ -81,8 +81,8 @@ int main(int argc, char **argv) {
 		}
 		cout << "Keep " << n << " signatures to learn projectors\n";
 
-		Matrix proj(vlat_full.width, rcf.nb_proj, rcf.proj_dir+"/"+rcf.proj_file);
-		Matrix eigen_values(rcf.nb_proj, 1, rcf.proj_dir+"/"+rcf.weight_file);
+		Matrix proj(vlat_full.width, rcf.nb_proj);
+		Matrix eigen_values(rcf.nb_proj, 1);
 
 		compute_vlat_projectors(rcf, vlat, n, vlat_full.width, proj, eigen_values);
 
