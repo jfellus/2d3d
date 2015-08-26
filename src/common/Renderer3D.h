@@ -35,6 +35,7 @@ knowledge of the CeCILL license and that you accept its terms.
 #ifndef RENDERER3D_H_
 #define RENDERER3D_H_
 
+#ifdef RETIN_ENABLE_OSMESA
 
 #include "retin/toolbox/codec3d/Codec3DOFF.h"
 #include "retin/toolbox/codec3d/Codec3DPLY.h"
@@ -68,5 +69,7 @@ protected:
 	void renderNormals(Mesh& mesh);
 	void init3d();
 };
+
+#endif
 
 #endif /* RENDERER3D_H_ */
