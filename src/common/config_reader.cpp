@@ -134,6 +134,11 @@ retin_config read_config_file(string file) {
 			cf.thumbnails_dir = value;
 		if(key=="similarity_score_sigmoid_factor")
 			cf.similarity_score_sigmoid_factor = atof(value.c_str());
+		if(key=="desc_output")
+			cf.desc_output = value;
+		if(key=="ndesc") {
+			cf.ndesc = atoi(value.c_str());
+		}
 	}
 
 	return cf;

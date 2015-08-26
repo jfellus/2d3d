@@ -41,6 +41,9 @@ public:
 	Matrix(const char* file, int flags = MATRIX_LOCAL | MATRIX_ATTACH) {load(file, flags);}
 	Matrix(size_t w, size_t h, const char* shared_id = NULL) {create(w,h,shared_id);}
 	Matrix(size_t w, size_t h, const string& shared_id) {create(w,h,shared_id.c_str());}
+	Matrix(const float* data, size_t w, size_t h) {
+		width = w; height = h; data = 0; bOwner = false; bShared=false; _shmid=-1;}
+	}
 
 	/** if this instance is the owner of the shared content, delete the whole shared matrix
 	 *  else destroy only the local reference to the shared matrix */

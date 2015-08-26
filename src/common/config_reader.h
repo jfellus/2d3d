@@ -52,6 +52,8 @@ public:
 	// Documents
 	string doc_list;
 	string doc_dir;
+	string desc_output;
+	size_t ndesc;
 
 	// Codebook
 	size_t dict_size;
@@ -121,7 +123,8 @@ public:
 					proj_learning_set_fraction(100),
 					vlat_inmemory(true), release_vlat_after_compact(true),
 					thumbnails_dir("thumbnails"),
-					similarity_score_sigmoid_factor(0.3f)
+					similarity_score_sigmoid_factor(0.3f),
+					desc_output("descriptors.fvec"),ndesc(5000000)
 					{
 		desc_scales.push_back(8);
 	};
