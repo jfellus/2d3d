@@ -32,6 +32,8 @@ knowledge of the CeCILL license and that you accept its terms.
 
 */
 
+#ifdef DRETIN_ENABLE_OSMESA
+
 #include "Renderer3D.h"
 #include <iostream>
 
@@ -162,3 +164,5 @@ void Renderer3D::render(Mesh& mesh, float* img) {
 	}
 
 }
+
+#endif
