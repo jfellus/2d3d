@@ -1,7 +1,8 @@
 /*
 Copyright © CNRS 2012. 
-Authors: Hedi Tabia, David Picard
-Contact: hedi.tabia@ensea.fr
+Authors: David Picard, Philippe-Henri Gosselin, Romain Negrel, Hedi 
+Tabia
+Contact: picard@ensea.fr
 
 This software is governed by the CeCILL license under French law and
 abiding by the rules of distribution of free software.  You can  use, 

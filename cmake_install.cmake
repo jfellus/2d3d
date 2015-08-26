@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+# Install script for directory: /home/jfellus/Bureau/C3DC_ETIS/indexing
+=======
 # Install script for directory: /users/jerofell/2d3d
+>>>>>>> 01e6df49c0e5e8383c6aa91ed5e4b22084ccf8f0
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +42,13 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
+<<<<<<< HEAD
+FILE(WRITE "/home/jfellus/Bureau/C3DC_ETIS/indexing/${CMAKE_INSTALL_MANIFEST}" "")
+FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
+  FILE(APPEND "/home/jfellus/Bureau/C3DC_ETIS/indexing/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+=======
 FILE(WRITE "/users/jerofell/2d3d/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
   FILE(APPEND "/users/jerofell/2d3d/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+>>>>>>> 01e6df49c0e5e8383c6aa91ed5e4b22084ccf8f0
 ENDFOREACH(file)

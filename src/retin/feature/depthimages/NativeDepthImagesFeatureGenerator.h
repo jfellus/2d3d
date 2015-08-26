@@ -1,6 +1,7 @@
 /*
 Copyright © CNRS 2012. 
-Authors: Philippe-Henri Gosselin, David Picard, Romain Négrel
+Authors: David Picard, Philippe-Henri Gosselin, Romain Negrel, Hedi 
+Tabia
 Contact: picard@ensea.fr
 
 This software is governed by the CeCILL license under French law and
