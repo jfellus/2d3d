@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 
 		// project
 		cout << "projecting on " << proj.height << " projectors ... ";
-		Matrix compact(proj.height, vlat.height, MATRIX_LOCAL);
+		Matrix compact(proj.height, vlat.height);
 		compact.clear();
 		matrix_CpAtB_float(compact, proj, vlat, proj.height, proj.width, vlat.height);
 		cout << "ok\n";
