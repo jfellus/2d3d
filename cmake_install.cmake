@@ -1,4 +1,4 @@
-# Install script for directory: /home/jfellus/Documents/These/prog/2D3D
+# Install script for directory: /users/jerofell/2d3d
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/jfellus/Documents/These/prog/2D3D/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/users/jerofell/2d3d/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/jfellus/Documents/These/prog/2D3D/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/users/jerofell/2d3d/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
