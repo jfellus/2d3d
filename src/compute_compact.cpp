@@ -34,6 +34,7 @@ knowledge of the CeCILL license and that you accept its terms.
 #include <iostream>
 #include "common/config_reader.h"
 #include "common/multithread.h"
+#include "common/tools.h"
 
 using namespace std;
 
@@ -56,6 +57,9 @@ void dump_config(const retin_config& rcf) {
 
 typedef struct {  float *C; float *A; float* B; size_t w; size_t n; size_t h; } CpAB_t;
 void CpAB_thread(CpAB_t* t, int i) {
+	DBGV(t->h);
+	DBGV(t->n);
+	DBGV(t->w);
 	for(int j=0; j<t->w; j++) {
 		for(int k=0; k<t->n; k++) {
 			t->C[i*t->w + j] += t->A[i*t->n + k]*t->B[k*t->w + j];

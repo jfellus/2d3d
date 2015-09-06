@@ -54,6 +54,8 @@ bool file_has_ext(const string& path, const char* ext);
 
 #define DBG(x) std::cout << x << "\n"
 
+#define DBGV(x) std::cout << #x << "=" << x << "\n"
+
 #define DBGN(x) \
 		do { \
 			std::cout << x << "\n"; fflush(stdout); \
