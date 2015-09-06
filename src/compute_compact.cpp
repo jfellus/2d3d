@@ -57,9 +57,6 @@ void dump_config(const retin_config& rcf) {
 
 typedef struct {  float *C; float *A; float* B; size_t w; size_t n; size_t h; } CpAB_t;
 void CpAB_thread(CpAB_t* t, int i) {
-	DBGV(t->h);
-	DBGV(t->n);
-	DBGV(t->w);
 	for(int j=0; j<t->w; j++) {
 		for(int k=0; k<t->n; k++) {
 			t->C[i*t->w + j] += t->A[i*t->n + k]*t->B[k*t->w + j];
@@ -69,6 +66,15 @@ void CpAB_thread(CpAB_t* t, int i) {
 __multithread__(the_CpAB)(void* t, int i) {CpAB_thread((CpAB_t*)t, i);}
 void matrix_CpAB_multithread(float *C, float *A, float* B, size_t w, size_t n, size_t h) {
 	CpAB_t* t = new CpAB_t;
+	t->C = C;
+	t->A = A;
+	t->B = B;
+	t->w = w;
+	t->n = n;
+	t->h = h;
+	DBGV(t->h);
+	DBGV(t->n);
+	DBGV(t->w);
 	the_CpAB(t, h);
 	delete t;
 }
