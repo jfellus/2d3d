@@ -61,8 +61,8 @@ file(GLOB vlat_sources ${vlat_dir}/StandardVlatBuilder.cpp ${vlat_dir}/StandardP
 file(GLOB r3d_sources src/common/vlat.cpp src/common/2D3D.cpp src/common/tools.cpp src/common/Renderer3D.cpp)
 file(GLOB r3d_headers src/common/vlat.h src/common/tools.hsrc/common/2D3D.h src/common/Renderer3D.h)
 
-file(GLOB common_sources src/common/vlat.cpp src/common/tools.cpp src/common/config_reader.cpp)
-file(GLOB common_headers src/common/vlat.h src/common/tools.h src/common/config_reader.h)
+file(GLOB common_sources src/common/vlat.cpp src/common/tools.cpp src/common/config_reader.cpp src/common/multithread.cpp)
+file(GLOB common_headers src/common/vlat.h src/common/tools.h src/common/config_reader.h src/common/multithread.h)
 
 
 

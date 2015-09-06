@@ -33,6 +33,7 @@ knowledge of the CeCILL license and that you accept its terms.
 */
 #include <iostream>
 #include "common/config_reader.h"
+#include "common/multithread.h"
 
 using namespace std;
 
@@ -51,6 +52,30 @@ void dump_config(const retin_config& rcf) {
 	cout << "vlat file: " << rcf.vlat_file << endl;
 	cout << "power norm: " << rcf.power_norm << "\n" << endl;
 }
+
+
+typedef struct {  float *C; float *A; float* B; size_t w; size_t n; size_t h; } CpAB_t;
+void CpAB_thread(CpAB_t* t, int i) {
+	for(int j=0; j<t->w; j++) {
+		for(int k=0; k<t->n; k++) {
+			t->C[i*t->w + j] += t->A[i*t->n + k]*t->B[k*t->w + j];
+		}
+	}
+}
+__multithread__(the_CpAB)(void* t, int i) {CpAB_thread((CpAB_t*)t, i);}
+void matrix_CpAB_multithread(float *C, float *A, float* B, size_t w, size_t n, size_t h) {
+	CpAB_t* t = new CpAB_t;
+	the_CpAB(t, h);
+	delete t;
+}
+
+
+
+
+
+
+
+
 
 //! Program that compact a set of vlat signatures
 int main(int argc, char **argv) {
@@ -83,6 +108,46 @@ int main(int argc, char **argv) {
 		Matrix proj(rcf.proj_dir + "/" + rcf.proj_file, MATRIX_LOCAL);
 		if (!proj) {cout << "Error " << rcf.proj_file << endl;	exit(-1);}
 		cout << proj.height << " features of size "<< proj.width << endl;
+
+		if(rcf.transpose_proj) {
+			if(vlat.width != proj.height) {
+				cout << "Error: vlat dimension != projectors dimension" << endl;
+				exit(-1);
+			}
+
+			if(rcf.proj_white) {
+				cout << "whitening projectors ... ";
+				Matrix weights(rcf.proj_dir+"/"+rcf.weight_file, MATRIX_LOCAL);
+				if(!weights) {cout << "Error " << rcf.weight_file << endl;	exit(-1); }
+
+				for(size_t i = 0 ; i < weights.width ; i++) {
+					float s = 1.f/sqrtf(weights[i]);
+					for(size_t j = 0; j<proj.height; j++)	proj[j*proj.width + i] *= s;
+				}
+				cout << "ok\n";
+			}
+
+			// project
+			cout << "projecting on " << proj.width << " projectors ... ";
+			Matrix compact(proj.width, vlat.height);
+			compact.clear();
+			matrix_CpAB_multithread(compact, proj, vlat, proj.width, proj.height, vlat.height);
+			cout << "ok\n";
+
+			// write results
+			cout << "saving results in " << rcf.compact_file << " ... ";
+			compact.save(rcf.compact_file);
+			cout << "ok\n";
+
+			if(rcf.release_vlat_after_compact) vlat.set_owner();
+
+			cout << "finished" << endl;
+
+			return 0;
+		}
+
+
+
 
 		if(vlat.width != proj.width) {
 			cout << "Error: vlat dimension != projectors dimension" << endl;

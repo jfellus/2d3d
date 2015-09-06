@@ -52,4 +52,15 @@ void cmd(const char* fmt, ...);
 
 bool file_has_ext(const string& path, const char* ext);
 
+#define DBG(x) std::cout << x << "\n"
+
+#define DBGN(x) \
+		do { \
+			std::cout << x << "\n"; fflush(stdout); \
+			std::cout  << "\033[1F\033[2K"; \
+		}while(0);
+
+#define DBG_PERCENT(x) DBGN((int)((float)x*1000)/10.0f << "%")
+
+
 #endif /* TOOLS_H_ */

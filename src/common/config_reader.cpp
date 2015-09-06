@@ -139,6 +139,8 @@ retin_config read_config_file(string file) {
 		if(key=="ndesc") {
 			cf.ndesc = atoi(value.c_str());
 		}
+		if(key=="transpose_proj")
+			cf.transpose_proj = (value=="true");
 	}
 
 	return cf;
