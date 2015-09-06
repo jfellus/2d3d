@@ -14,3 +14,4 @@ docid_to_path
 *similarity*.txt
 .*
 !/src/*
+OAR*
